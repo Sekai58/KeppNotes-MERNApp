@@ -1,17 +1,23 @@
 import "./App.css";
-import Footer from "./components/footer/footer";
-import Header from "./components/header/header";
-import LandPage from "./components/LandPage/LandPage";
-import { BrowserRouter } from "react-router-dom";
+import Footer from "./components/footer/Footer";
+import Header from "./components/header/Header";
+import LandPage from "./components/LandingPage/LandingPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MyNotes from "./components/mynotes/MyNotes";
 
-const App = () => (
-  <BrowserRouter>
-    <Header />
-    <main>
-      <Route path="/" component={LandPage} />
-    </main>
-    <Footer />
-  </BrowserRouter>
-);
+function App() {
+  return (
+    <BrowserRouter>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<LandPage />} exact />
+          <Route path="/notes" element={<MyNotes />} />
+        </Routes>
+      </main>
+      <Footer />
+    </BrowserRouter>
+  );
+}
 
 export default App;
