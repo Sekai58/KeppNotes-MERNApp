@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion, Button, Card } from "react-bootstrap";
 import MainScreen from "../mainscreen/MainScreen";
 import { Link } from "react-router-dom";
-import notes from "../data/notes";
+import axios from "axios";
 
 const MyNotes = () => {
+  const [notes, setNotes] = useState([]);
+
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
     }
   };
+
+  const fetchnotes = async () => {
+    const { data } = await axios.get("/api/notes");
+    setNotes(data);
+  };
+  console.log(notes);
+
+  useEffect(() => {
+    fetchnotes();
+  }, []);
+
   return (
     <MainScreen title="Welcome Back..">
       <Link to="createnote">
@@ -17,7 +30,7 @@ const MyNotes = () => {
         </Button>
       </Link>
       {notes.map((note) => (
-        <Accordion defaultActiveKey="0" flush>
+        <Accordion defaultActiveKey="0" key={note._id} flush>
           <Accordion.Item>
             <Card style={{ margin: 10 }}>
               <Card.Header style={{ display: "flex" }}>
@@ -33,7 +46,7 @@ const MyNotes = () => {
                   <Accordion.Header>{note.title}</Accordion.Header>
                 </span>
                 <div>
-                  <Button href={`/note/${note._id}`} size="sm">
+                  <Button href={`/note/${note._id}`} size="sm" className="mx-2">
                     Edit
                   </Button>
                   <Button
