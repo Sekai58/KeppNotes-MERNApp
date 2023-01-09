@@ -5,21 +5,21 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <div>
-      <Navbar
-        bg="light"
-        variant="light"
-        expand="lg"
-        //style={{ position: "fixed", width: "100%" }}
-      >
+      <Navbar bg="light" expand="lg" variant="light">
         <Container>
-          <Navbar.Brand href="/">Keep notes</Navbar.Brand>
+          <Navbar.Brand>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              KeepNotes
+            </Link>{" "}
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            <Nav className="m-auto" navbarScroll>
+            <Nav className="m-auto">
               <Form className="d-flex">
                 <Form.Control
                   type="search"
@@ -27,13 +27,13 @@ const Header = () => {
                   className="me-2"
                   aria-label="Search"
                 />
-                <Button variant="dark" className="me-5">
-                  Search
-                </Button>
+                <Button variant="outline-dark">Search</Button>
               </Form>
-              <Nav.Link href="#action1">My notes</Nav.Link>
-              <NavDropdown title="My name" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action4">My profile</NavDropdown.Item>
+            </Nav>
+            <Nav style={{ maxHeight: "100px" }} navbarScroll>
+              <Nav.Link href="/notes">MyNotes</Nav.Link>
+              <NavDropdown title="Sekai" id="navbarScrollingDropdown">
+                <NavDropdown.Item href="#action3">My Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action5">Log out</NavDropdown.Item>
               </NavDropdown>
